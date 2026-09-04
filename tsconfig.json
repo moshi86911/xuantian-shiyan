@@ -14,6 +14,6 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "types": ["vite/client", "vitest/globals"]
   },
-  "include": ["src", "tests"],
+  "include": ["src", "tests", "vite.config.ts"],
   "exclude": ["node_modules", "dist"]
 }
