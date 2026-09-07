@@ -35,7 +35,7 @@ describe('CardExecutor', () => {
   beforeEach(() => {
     playerBuffs = new BuffSystem();
     enemyBuffs = new BuffSystem();
-    executor = new CardExecutor(new CardEffectExecutor(), playerBuffs, enemyBuffs);
+    executor = new CardExecutor(new CardEffectExecutor(playerBuffs, enemyBuffs), playerBuffs, enemyBuffs);
     player = makePlayer();
     enemies = [makeEnemy('e1', 30), makeEnemy('e2', 20)];
   });
@@ -232,5 +232,132 @@ describe('CardExecutor', () => {
     executor.play(card, player, enemies, 0);
     // (8 + 4) * 0.75 = 9
     expect(enemies[0].hp).toBe(21);
+  });
+});
+
+describe('Scaling damage via add_status', () => {
+  let player: PlayerState;
+  let enemies: EnemyState[];
+  let playerBuffs: BuffSystem;
+  let enemyBuffs: BuffSystem;
+  let executor: CardExecutor;
+
+  beforeEach(() => {
+    playerBuffs = new BuffSystem();
+    enemyBuffs = new BuffSystem();
+    executor = new CardExecutor(new CardEffectExecutor(playerBuffs, enemyBuffs), playerBuffs, enemyBuffs);
+    player = makePlayer();
+    enemies = [makeEnemy('e1', 100)];
+  });
+
+  it('damage_per_combo scales damage by combo count', () => {
+    // Simulate 7 combo by manually applying
+    for (let i = 0; i < 7; i++) {
+      playerBuffs.apply({ type: 'combo', stacks: 1, source: 'player' });
+    }
+    const card: Card = {
+      id: 'sword_ultimate', name: '万剑归宗', description: '',
+      type: 'attack', rarity: 'legendary', cost: 3, targetType: 'enemy',
+      effects: [
+        { type: 'add_status', value: 5, statusId: 'damage_per_combo' },
+        { type: 'damage', value: 0 },
+      ],
+    };
+    executor.play(card, player, enemies, 0);
+    // base 0 + 5 * 7 = 35 damage
+    expect(enemies[0].hp).toBe(65);
+  });
+
+  it('damage_per_mark scales damage by mark count on enemy', () => {
+    enemyBuffs.apply({ type: 'mark', stacks: 3, source: 'player' });
+    const card: Card = {
+      id: 'talisman_thunder', name: '五雷符', description: '',
+      type: 'attack', rarity: 'common', cost: 2, targetType: 'enemy',
+      effects: [
+        { type: 'add_status', value: 5, statusId: 'damage_per_mark' },
+        { type: 'damage', value: 0 },
+      ],
+    };
+    executor.play(card, player, enemies, 0);
+    // base 0 + 5 * 3 = 15 damage
+    expect(enemies[0].hp).toBe(85);
+  });
+
+  it('consume_mark_damage replaces base damage and removes marks', () => {
+    enemyBuffs.apply({ type: 'mark', stacks: 4, source: 'player' });
+    const card: Card = {
+      id: 'talisman_explosion', name: '爆裂符', description: '',
+      type: 'attack', rarity: 'rare', cost: 2, targetType: 'enemy',
+      effects: [
+        { type: 'add_status', value: 4, statusId: 'consume_mark_damage' },
+        { type: 'damage', value: 8 },
+      ],
+    };
+    executor.play(card, player, enemies, 0);
+    // base 8 + 4 * 4 = 24 damage; marks consumed
+    expect(enemies[0].hp).toBe(76);
+    expect(enemyBuffs.totalStacks('mark')).toBe(0);
+  });
+
+  it('金光神符 applies to all enemies with mark scaling', () => {
+    enemyBuffs.apply({ type: 'mark', stacks: 2, source: 'player' });
+    enemies = [makeEnemy('e1', 100), makeEnemy('e2', 100)];
+    const card: Card = {
+      id: 'talisman_golden_light', name: '金光神符', description: '',
+      type: 'attack', rarity: 'legendary', cost: 3, targetType: 'all_enemies',
+      effects: [
+        { type: 'add_status', value: 5, statusId: 'damage_per_mark' },
+        { type: 'damage', value: 15 },
+      ],
+    };
+    executor.play(card, player, enemies, 0);
+    // base 15 + 5*2 = 25 to each enemy
+    expect(enemies[0].hp).toBe(75);
+    expect(enemies[1].hp).toBe(75);
+  });
+
+  it('bypass_block prevents block from absorbing damage', () => {
+    enemies[0].block = 10;
+    const card: Card = {
+      id: 'sword_break', name: '破甲式', description: '',
+      type: 'attack', rarity: 'common', cost: 2, targetType: 'enemy',
+      effects: [
+        { type: 'add_status', value: 0, statusId: 'bypass_block' },
+        { type: 'damage', value: 9 },
+      ],
+    };
+    executor.play(card, player, enemies, 0);
+    expect(enemies[0].block).toBe(10);
+    expect(enemies[0].hp).toBe(91);
+  });
+
+  it('mark_to_stun applies to all enemies when target=all_enemies', () => {
+    enemyBuffs.apply({ type: 'mark', stacks: 2, source: 'player' });
+    enemies = [makeEnemy('e1', 100), makeEnemy('e2', 100)];
+    const card: Card = {
+      id: 'mark_to_stun_aoe', name: '天雷破', description: '',
+      type: 'skill', rarity: 'rare', cost: 1, targetType: 'all_enemies',
+      effects: [
+        { type: 'add_status', value: 2, statusId: 'mark_to_stun' },
+      ],
+    };
+    executor.play(card, player, enemies, 0);
+    // 2 marks * 2 stun per mark, applied to 2 enemies = 8 stacks total
+    expect(enemyBuffs.totalStacks('stun')).toBe(8);
+  });
+
+  it('remove_all_enemy_buffs clears buffs across all enemies', () => {
+    enemyBuffs.apply({ type: 'strength', stacks: 5, source: 'enemy' });
+    enemyBuffs.apply({ type: 'weak', stacks: 1, source: 'enemy' });
+    enemies = [makeEnemy('e1', 100), makeEnemy('e2', 100)];
+    const card: Card = {
+      id: 'purify', name: '净化', description: '',
+      type: 'skill', rarity: 'rare', cost: 1, targetType: 'all_enemies',
+      effects: [
+        { type: 'add_status', value: 0, statusId: 'remove_all_enemy_buffs' },
+      ],
+    };
+    executor.play(card, player, enemies, 0);
+    expect(enemyBuffs.all()).toHaveLength(0);
   });
 });

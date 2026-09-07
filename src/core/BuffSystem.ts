@@ -12,6 +12,7 @@ export type BuffType =
   | 'combo'           // Sword cultivator mechanic (counter)
   | 'intangible'      // Reduce damage to 1
   | 'thorns'          // Deal X damage when hit
+  | 'stun'            // Skip enemy action on next turn
   | 'qi'            // +X qi at turn start
   | 'energy';         // +X energy at turn start (power)
 

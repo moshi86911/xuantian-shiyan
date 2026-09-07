@@ -34,7 +34,7 @@ import type { MetaState } from '../../src/core/types';
 function makeBattleEngine(): BattleEngine {
   const playerBuffs = new BuffSystem();
   const enemyBuffs = new BuffSystem();
-  const cardExecutor = new CardExecutor(new CardEffectExecutor(), playerBuffs, enemyBuffs);
+  const cardExecutor = new CardExecutor(new CardEffectExecutor(playerBuffs, enemyBuffs), playerBuffs, enemyBuffs);
   const combo = new ComboTracker();
   const rng = createRng('integration-test');
   return new BattleEngine(cardExecutor, playerBuffs, enemyBuffs, combo, rng);

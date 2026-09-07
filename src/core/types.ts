@@ -22,6 +22,10 @@ export interface CardEffect {
   value: number;
   target?: TargetType;
   statusId?: string;
+  /** Internal flag set by CardExecutor when a `bypass_block` add_status
+   * flag precedes this damage effect. Causes applyDamage to ignore the
+   * target's block. */
+  bypassBlock?: boolean;
 }
 
 export interface Card {
