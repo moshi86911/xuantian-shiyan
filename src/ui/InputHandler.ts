@@ -50,8 +50,12 @@ export class InputHandler {
    */
   handleClick(event: MouseEvent, state: GameState): InputAction {
     const rect = this.canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+    // CSS scaling: convert display-space coords to canvas-internal coords so
+    // hitbox math (which uses canvas.width / canvas.height) matches.
+    const scaleX = rect.width > 0 ? this.canvas.width / rect.width : 1;
+    const scaleY = rect.height > 0 ? this.canvas.height / rect.height : 1;
+    const x = (event.clientX - rect.left) * scaleX;
+    const y = (event.clientY - rect.top) * scaleY;
 
     switch (state.screen) {
       case 'main_menu':
