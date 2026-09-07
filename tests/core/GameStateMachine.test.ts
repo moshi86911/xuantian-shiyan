@@ -522,6 +522,85 @@ describe('GameStateMachine — victory reducer', () => {
   });
 });
 
+describe('GameStateMachine — layer progression / floor advance', () => {
+  /**
+   * Build a 2-layer map where layer 0 is one node and layer 1 is the boss.
+   * The current node is set to the boss (the one we're leaving after a
+   * victory). All non-boss nodes are flagged available so any routing
+   * reducer accepts them.
+   */
+  function buildMapWithBossAtEnd(floor: number): MapState {
+    const battle: MapNode = {
+      id: `battle_${floor}_0`,
+      type: 'battle',
+      x: 0, y: 0,
+      connections: [`boss_${floor}_0`],
+      visited: false,
+      available: true,
+    };
+    const boss: MapNode = {
+      id: `boss_${floor}_0`,
+      type: 'boss',
+      x: 0, y: 0,
+      connections: [],
+      visited: false,
+      available: true,
+    };
+    return {
+      floor,
+      nodes: [[battle], [boss]],
+      currentNodeId: boss.id, // simulate "we just won the boss battle"
+    };
+  }
+
+  /** Build a run on the given floor with map and reward ready to skip. */
+  function rewardStateForFloor(floor: number): GameState {
+    const map = buildMapWithBossAtEnd(floor);
+    return {
+      ...freshState(),
+      screen: 'reward',
+      map,
+      run: {
+        seed: `floor-${floor}-test`,
+        characterId: 'sword',
+        floor,
+        hp: 75,
+        maxHp: 75,
+        gold: 50,
+        deck: ['sword_strike'],
+        relics: [],
+        potions: [],
+        path: [],
+        startTime: 0,
+      },
+      reward: { cardChoices: [] },
+    };
+  }
+
+  it('floor 1 boss victory → state.run.floor = 2', () => {
+    const m = new GameStateMachine(rewardStateForFloor(1));
+    const next = m.dispatch({ type: 'reward_skip' });
+    expect(next.screen).toBe('map');
+    expect(next.run?.floor).toBe(2);
+    expect(next.map?.floor).toBe(2);
+  });
+
+  it('floor 5 boss victory → state.run.floor = 6', () => {
+    const m = new GameStateMachine(rewardStateForFloor(5));
+    const next = m.dispatch({ type: 'reward_skip' });
+    expect(next.screen).toBe('map');
+    expect(next.run?.floor).toBe(6);
+    expect(next.map?.floor).toBe(6);
+  });
+
+  it('floor 6 boss victory → state.screen = victory', () => {
+    const m = new GameStateMachine(rewardStateForFloor(6));
+    const next = m.dispatch({ type: 'reward_skip' });
+    expect(next.screen).toBe('victory');
+    expect(next.run?.path).toContain('boss_6_0');
+  });
+});
+
 describe('GameStateMachine — transition callbacks', () => {
   it('onTransition fires when screen changes', () => {
     const m = new GameStateMachine(freshState());
