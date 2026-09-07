@@ -442,17 +442,73 @@ describe('GameStateMachine — rest', () => {
   });
 });
 
-describe('GameStateMachine — game_over / victory stubs', () => {
-  it('game_over_choice keepSave=true clears run but keeps state on game_over', () => {
-    const m = new GameStateMachine(stateWithScreen('game_over'));
+describe('GameStateMachine — game_over reducer', () => {
+  function gameOverState(): GameState {
+    return {
+      ...stateWithMap(buildTinyMap()),
+      screen: 'game_over',
+      saveSlots: [null, null, null],
+    };
+  }
+
+  it('keepSave=true → return to main_menu with run cleared, slot 0 preserved', () => {
+    const s = gameOverState();
+    s.saveSlots = [s.run!, null, null];
+    const m = new GameStateMachine(s);
     const next = m.dispatch({ type: 'game_over_choice', keepSave: true });
-    // Stub: stays on game_over screen; Part 2 will own the full view.
-    expect(next.screen).toBe('game_over');
+    expect(next.screen).toBe('main_menu');
+    expect(next.run).toBeUndefined();
+    expect(next.map).toBeUndefined();
+    expect(next.battle).toBeUndefined();
+    expect(next.reward).toBeUndefined();
+    expect(next.shop).toBeUndefined();
+    expect(next.event).toBeUndefined();
+    // Slot 0 should still hold the previous run (so Continue stays enabled)
+    expect(next.saveSlots[0]).toEqual(s.run);
   });
 
-  it('victory_continue stays on victory screen (stub)', () => {
-    const m = new GameStateMachine(stateWithScreen('victory'));
+  it('keepSave=false → return to main_menu with all slots wiped', () => {
+    const s = gameOverState();
+    s.saveSlots = [s.run!, null, null];
+    const m = new GameStateMachine(s);
+    const next = m.dispatch({ type: 'game_over_choice', keepSave: false });
+    expect(next.screen).toBe('main_menu');
+    expect(next.run).toBeUndefined();
+    expect(next.map).toBeUndefined();
+    expect(next.battle).toBeUndefined();
+    expect(next.saveSlots).toEqual([null, null, null]);
+  });
+
+  it('ignores non-matching actions', () => {
+    const m = new GameStateMachine(gameOverState());
+    const next = m.dispatch({ type: 'menu_select', action: 'start' });
+    expect(next.screen).toBe('game_over');
+  });
+});
+
+describe('GameStateMachine — victory reducer', () => {
+  function victoryState(): GameState {
+    return {
+      ...stateWithMap(buildTinyMap()),
+      screen: 'victory',
+      saveSlots: [null, null, null],
+    };
+  }
+
+  it('victory_continue → return to main_menu with slot 0 wiped', () => {
+    const s = victoryState();
+    s.saveSlots = [s.run!, null, null];
+    const m = new GameStateMachine(s);
     const next = m.dispatch({ type: 'victory_continue' });
+    expect(next.screen).toBe('main_menu');
+    expect(next.run).toBeUndefined();
+    expect(next.map).toBeUndefined();
+    expect(next.saveSlots).toEqual([null, null, null]);
+  });
+
+  it('ignores non-matching actions', () => {
+    const m = new GameStateMachine(victoryState());
+    const next = m.dispatch({ type: 'menu_select', action: 'start' });
     expect(next.screen).toBe('victory');
   });
 });

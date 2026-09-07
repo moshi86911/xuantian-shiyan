@@ -523,15 +523,54 @@ function reduceRest(s: GameState, action: DispatchAction, ctx: DispatchContext):
 }
 
 function reduceGameOver(s: GameState, action: DispatchAction): GameState {
-  // Part 2 will own the GameOver view + full keepSave logic. For now this
-  // is a placeholder so the dispatch table can route here without crashing.
   if (action.type !== 'game_over_choice') return s;
-  return s;
+  if (action.keepSave) {
+    // Keep slot 0 — return to main_menu with continue enabled.
+    return {
+      ...s,
+      screen: 'main_menu',
+      run: undefined,
+      map: undefined,
+      battle: undefined,
+      reward: undefined,
+      shop: undefined,
+      event: undefined,
+      pendingShopRemove: false,
+      floorJustAdvanced: false,
+    };
+  }
+  // Wipe slot 0 — return to main_menu with continue disabled.
+  return {
+    ...s,
+    screen: 'main_menu',
+    run: undefined,
+    map: undefined,
+    battle: undefined,
+    reward: undefined,
+    shop: undefined,
+    event: undefined,
+    pendingShopRemove: false,
+    floorJustAdvanced: false,
+    saveSlots: [null, null, null],
+  };
 }
 
 function reduceVictory(s: GameState, action: DispatchAction): GameState {
   if (action.type !== 'victory_continue') return s;
-  return s;
+  // Clear slot 0 to prevent continue from re-loading a completed run.
+  return {
+    ...s,
+    screen: 'main_menu',
+    run: undefined,
+    map: undefined,
+    battle: undefined,
+    reward: undefined,
+    shop: undefined,
+    event: undefined,
+    pendingShopRemove: false,
+    floorJustAdvanced: false,
+    saveSlots: [null, null, null],
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -549,6 +588,35 @@ export class GameStateMachine {
   /** Register a listener that fires on every screen transition. */
   onTransition(fn: TransitionListener): void {
     this.listeners.push(fn);
+  }
+
+  /**
+   * Merge options into the current state without touching the screen or any
+   * run/battle data. Used by main.ts to refresh `saveSlots` from SaveManager
+   * every time the player returns to main_menu (so the "Continue" button
+   * reflects the latest disk save).
+   */
+  updateOptions(opts: { savedSlot?: RunState | null; saveSlots?: (RunState | null)[] }): void {
+    const next: GameState = { ...this.state };
+    if (opts.saveSlots !== undefined) {
+      next.saveSlots = opts.saveSlots;
+    } else if (opts.savedSlot !== undefined) {
+      // Update slot 0 with the latest value; preserve the rest.
+      const slots = [...this.state.saveSlots];
+      slots[0] = opts.savedSlot;
+      while (slots.length < 3) slots.push(null);
+      next.saveSlots = slots.slice(0, 3);
+    }
+    this.state = next;
+  }
+
+  /** Direct state replacement — for testing and for end-of-run resets. */
+  setState(state: GameState): void {
+    const before = this.state.screen;
+    this.state = state;
+    if (state.screen !== before) {
+      for (const fn of this.listeners) fn(before, state.screen);
+    }
   }
 
   /**
