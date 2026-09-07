@@ -1,0 +1,102 @@
+[
+  {
+    "id": "old_sage",
+    "title": "山中老者",
+    "text": "你遇到一位山中老者，他愿意传授你一项技艺。",
+    "choices": [
+      { "text": "聆听教诲", "effect": { "type": "upgrade_random_card" } },
+      { "text": "婉言谢绝", "effect": { "type": "gain_gold", "amount": 30 } },
+      { "text": "强行搜刮", "effect": { "type": "lose_hp", "amount": 10 } }
+    ]
+  },
+  {
+    "id": "mysterious_well",
+    "title": "古井之谜",
+    "text": "一口古井散发着幽光，似乎通向某个神秘空间。",
+    "choices": [
+      { "text": "探身查看", "effect": { "type": "lose_hp", "amount": 5 } },
+      { "text": "投入金币许愿", "effect": { "type": "lose_gold", "amount": 50 } },
+      { "text": "默然离去", "effect": { "type": "noop" } }
+    ]
+  },
+  {
+    "id": "mysterious_merchant",
+    "title": "神秘商人",
+    "text": "一位蒙面商人向你招手，展示着各种奇异的物品。",
+    "choices": [
+      { "text": "购买丹药", "effect": { "type": "lose_gold", "amount": 100 } },
+      { "text": "婉言谢绝", "effect": { "type": "noop" } },
+      { "text": "强行搜刮", "effect": { "type": "lose_hp", "amount": 15 } }
+    ]
+  },
+  {
+    "id": "wounded_beast",
+    "title": "受伤妖兽",
+    "text": "一只受伤的妖兽倒在路边，它用哀求的眼神看着你。",
+    "choices": [
+      { "text": "帮助它", "effect": { "type": "lose_hp", "amount": 10 } },
+      { "text": "斩草除根", "effect": { "type": "gain_gold", "amount": 30 } },
+      { "text": "无视离去", "effect": { "type": "noop" } }
+    ]
+  },
+  {
+    "id": "ancient_relics",
+    "title": "上古遗迹",
+    "text": "你发现了一座上古遗迹，墙壁上刻着古老的符文。",
+    "choices": [
+      { "text": "静心研读", "effect": { "type": "gain_qi", "amount": 2 } },
+      { "text": "搜取财宝", "effect": { "type": "gain_gold", "amount": 50 } },
+      { "text": "触碰符文", "effect": { "type": "lose_hp", "amount": 8 } }
+    ]
+  },
+  {
+    "id": "mirror_illusion",
+    "title": "镜中幻象",
+    "text": "一面古镜映出你的倒影，但它的动作和你不同步。",
+    "choices": [
+      { "text": "凝视镜面", "effect": { "type": "gain_max_hp", "amount": 5 } },
+      { "text": "转身离去", "effect": { "type": "noop" } },
+      { "text": "砸碎古镜", "effect": { "type": "lose_hp", "amount": 12 } }
+    ]
+  },
+  {
+    "id": "lost_cavern",
+    "title": "失落洞府",
+    "text": "你发现一处隐世洞府，洞中灵气充沛。",
+    "choices": [
+      { "text": "打坐修炼", "effect": { "type": "gain_qi", "amount": 3 } },
+      { "text": "搜取丹药", "effect": { "type": "gain_gold", "amount": 80 } },
+      { "text": "径直穿过", "effect": { "type": "noop" } }
+    ]
+  },
+  {
+    "id": "xinmo_trial",
+    "title": "心魔试炼",
+    "text": "你感到心魔侵扰，脑海中充满了杂念。",
+    "choices": [
+      { "text": "以意志对抗", "effect": { "type": "lose_hp", "amount": 5 } },
+      { "text": "吞服丹药", "effect": { "type": "gain_hp", "amount": 15 } },
+      { "text": "默念清心咒", "effect": { "type": "gain_qi", "amount": 1 } }
+    ]
+  },
+  {
+    "id": "thunder_storm",
+    "title": "雷雨天象",
+    "text": "乌云压顶，雷声隆隆，似有天劫将至。",
+    "choices": [
+      { "text": "引雷入体", "effect": { "type": "lose_hp", "amount": 8 } },
+      { "text": "避雨等待", "effect": { "type": "gain_hp", "amount": 10 } },
+      { "text": "继续前行", "effect": { "type": "noop" } }
+    ]
+  },
+  {
+    "id": "fellow_disciple",
+    "title": "同门师兄",
+    "text": "一位同门师兄邀请你一同切磋武艺。",
+    "choices": [
+      { "text": "切磋技艺", "effect": { "type": "gain_gold", "amount": 25 } },
+      { "text": "婉言谢绝", "effect": { "type": "noop" } },
+      { "text": "比试剑术", "effect": { "type": "lose_hp", "amount": 5 } }
+    ]
+  }
+]
