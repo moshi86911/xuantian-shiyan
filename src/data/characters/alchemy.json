@@ -1,0 +1,25 @@
+{
+  "id": "alchemy",
+  "name": "素心",
+  "title": "丹修",
+  "description": "以丹入道，药济苍生。丹修通过丹药 buff 实现续航，依赖灵气释放强力效果。",
+  "maxHp": 85,
+  "startingDeck": [
+    "alchemy_calm",
+    "alchemy_calm",
+    "alchemy_calm",
+    "alchemy_calm",
+    "alchemy_calm",
+    "alchemy_spring",
+    "alchemy_spring",
+    "alchemy_spring",
+    "alchemy_pill_basic",
+    "alchemy_pill_basic"
+  ],
+  "startingRelics": [],
+  "mechanic": {
+    "name": "丹药",
+    "description": "每回合自动恢复生命值（通过丹药卡牌），可消耗灵气释放强力效果。"
+  },
+  "art": "alchemy.svg"
+}

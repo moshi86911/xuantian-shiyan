@@ -1,0 +1,25 @@
+{
+  "id": "talisman",
+  "name": "清虚",
+  "title": "符修",
+  "description": "以符入道，符咒驱邪。符修通过给敌人叠印记来触发强力效果。",
+  "maxHp": 70,
+  "startingDeck": [
+    "talisman_charm",
+    "talisman_charm",
+    "talisman_charm",
+    "talisman_thunder",
+    "talisman_thunder",
+    "talisman_thunder",
+    "talisman_thunder",
+    "talisman_thunder",
+    "talisman_focus_qi",
+    "talisman_focus_qi"
+  ],
+  "startingRelics": [],
+  "mechanic": {
+    "name": "印记",
+    "description": "给敌人上印记，特定卡牌对每层印记造成额外效果。"
+  },
+  "art": "talisman.svg"
+}

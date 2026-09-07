@@ -1,0 +1,25 @@
+{
+  "id": "sword",
+  "name": "凌霄",
+  "title": "剑修",
+  "description": "以剑入道，一剑破万法。剑修以连击为核心，出牌越快伤害越高。",
+  "maxHp": 75,
+  "startingDeck": [
+    "sword_strike",
+    "sword_strike",
+    "sword_strike",
+    "sword_strike",
+    "sword_strike",
+    "sword_slash",
+    "sword_slash",
+    "sword_slash",
+    "sword_defend",
+    "sword_defend"
+  ],
+  "startingRelics": [],
+  "mechanic": {
+    "name": "连击",
+    "description": "每打出一张攻击牌获得 1 连击，万剑归宗等卡牌根据连击数造成额外伤害。"
+  },
+  "art": "sword.svg"
+}

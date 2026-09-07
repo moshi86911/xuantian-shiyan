@@ -115,6 +115,7 @@ export interface RunState {
 
 export interface MetaState {
   unlockedCharacters: CharacterId[];
+  completedCharacters: CharacterId[];
   unlockedCards: string[];
   achievements: string[];
   stats: {

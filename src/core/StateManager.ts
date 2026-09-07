@@ -4,6 +4,7 @@ type Listener = (state: GameState) => void;
 
 const DEFAULT_META: MetaState = {
   unlockedCharacters: ['sword'],
+  completedCharacters: [],
   unlockedCards: [],
   achievements: [],
   stats: {
