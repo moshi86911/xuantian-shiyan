@@ -175,6 +175,8 @@ function effectHitsEnemy(effect: CardEffect): boolean {
  */
 export class CardExecutor {
   private getComboCount: () => number;
+  /** True when the caller supplied `options.getComboCount` explicitly. */
+  private comboSourceExplicit: boolean;
 
   constructor(
     private effectExecutor: CardEffectExecutor,
@@ -185,8 +187,21 @@ export class CardExecutor {
     // Default combo source: read `combo` buff stacks from the player
     // BuffSystem. Callers (e.g. BattleEngine) can override with a callback
     // that reads from ComboTracker.
+    this.comboSourceExplicit = options.getComboCount !== undefined;
     this.getComboCount =
       options.getComboCount ?? (() => this.playerBuffs.totalStacks('combo'));
+  }
+
+  /**
+   * Point `damage_per_combo` at a live combo source. BattleEngine calls this
+   * at construction so scaling reads its ComboTracker instead of the legacy
+   * `combo` buff stacks. A `getComboCount` supplied at construction wins —
+   * this call is then a no-op, so an explicit caller choice is never
+   * silently replaced.
+   */
+  setComboSource(getComboCount: () => number): void {
+    if (this.comboSourceExplicit) return;
+    this.getComboCount = getComboCount;
   }
 
   /** True if the player can afford the card and valid targets exist. */

@@ -57,6 +57,11 @@ export class BattleEngine {
     private _rng: SeededRandom,
   ) {
     void this._rng;
+    // `damage_per_combo` scaling must read the live ComboTracker this engine
+    // owns (the engine calls combo.addCombo(1) on every attack), not the
+    // legacy `combo` buff stacks in playerBuffs. Wiring it here means every
+    // caller gets correct scaling without having to remember the callback.
+    this.cardExecutor.setComboSource(() => this.combo.getState().count);
   }
 
   /** Current battle phase. */

@@ -234,6 +234,7 @@ describe('BattleEngine', () => {
     let engine: BattleEngine;
     let deck: EngineDeck;
     let combo: ComboTracker;
+    let playerBuffs: BuffSystem;
 
     // Registry covering the five hand slots we use in tests.
     const registryCards: Card[] = [
@@ -243,6 +244,12 @@ describe('BattleEngine', () => {
       makeCard({ id: 'bash',    name: 'Bash',    type: 'attack', cost: 2, targetType: 'enemy', exhaust: true,
                  effects: [{ type: 'damage', value: 8 }] }),
       makeCard({ id: 'cleave',  name: 'Cleave',  type: 'attack', cost: 1, targetType: 'all_enemies',  effects: [{ type: 'damage', value: 4 }] }),
+      // 万剑归宗: damage = 5 x combo count (see src/data/cards/sword.json).
+      makeCard({ id: 'sword_ultimate', name: '万剑归宗', type: 'attack', rarity: 'legendary', cost: 3, targetType: 'enemy',
+                 effects: [
+                   { type: 'add_status', value: 5, target: 'enemy', statusId: 'damage_per_combo' },
+                   { type: 'damage', value: 0, target: 'enemy' },
+                 ] }),
     ];
     const cardById = makeCardRegistry(registryCards);
 
@@ -250,6 +257,7 @@ describe('BattleEngine', () => {
       const built = buildEngine();
       engine = built.engine;
       combo = built.combo;
+      playerBuffs = built.playerBuffs;
       player = makePlayer();
       enemies = [makeEnemy('e1', 30)];
       const builtDeck = makeEngineDeck(
@@ -338,6 +346,26 @@ describe('BattleEngine', () => {
       engine.playCard(0, 0, player, enemies, cardById);
 
       expect(combo.getState().count).toBe(0);
+    });
+
+    it('damage_per_combo scales from the engine ComboTracker, not combo buff stacks', () => {
+      // 7 prior attacks worth of combo, held only by the tracker. The legacy
+      // `combo` buff stacks are deliberately set to a different value so a
+      // regression that reads playerBuffs would produce 10 damage, not 35.
+      combo.addCombo(7);
+      playerBuffs.apply({ type: 'combo', stacks: 2, source: 'player' });
+
+      enemies[0].maxHp = 100;
+      enemies[0].hp = 100;
+      player.hand = ['sword_ultimate', 'defend', 'heal', 'bash', 'cleave'];
+
+      const result = engine.playCard(0, 0, player, enemies, cardById);
+
+      expect(result.success).toBe(true);
+      // base 0 + 5 * 7 = 35
+      expect(enemies[0].hp).toBe(65);
+      // The ultimate is itself an attack, so combo ticks up afterwards.
+      expect(combo.getState().count).toBe(8);
     });
   });
 
