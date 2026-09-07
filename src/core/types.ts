@@ -142,6 +142,17 @@ export type GameScreen =
   | 'game_over'
   | 'victory';
 
+export interface RewardState {
+  cardChoices: Card[];
+}
+
+export interface EventState {
+  id: string;
+  title: string;
+  text: string;
+  choices: { text: string; effect: unknown }[];
+}
+
 export interface GameState {
   screen: GameScreen;
   run?: RunState;
@@ -149,4 +160,14 @@ export interface GameState {
   map?: MapState;
   meta: MetaState;
   saveSlots: (RunState | null)[];
+  /** Card reward choices after a battle victory. */
+  reward?: RewardState;
+  /** Current shop state when screen === 'shop'. */
+  shop?: import('./Shop').ShopState;
+  /** Current event state when screen === 'event'. */
+  event?: EventState;
+  /** When true, the shop view should prompt the player to pick a card to remove. */
+  pendingShopRemove?: boolean;
+  /** Transient flag: the player just completed a node and the next floor's map is queued. */
+  floorJustAdvanced?: boolean;
 }
