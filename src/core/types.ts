@@ -170,4 +170,6 @@ export interface GameState {
   pendingShopRemove?: boolean;
   /** Transient flag: the player just completed a node and the next floor's map is queued. */
   floorJustAdvanced?: boolean;
+  /** UI-only state: the character id currently highlighted in character_select. */
+  selectedCharacterId?: CharacterId;
 }

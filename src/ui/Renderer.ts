@@ -4,6 +4,13 @@ import type { GameState } from '../core/types';
 import { renderBattle } from './BattleView';
 import { renderMap } from './MapView';
 import { renderMainMenu } from './MenuView';
+import { renderCharacterSelect } from './CharacterSelectView';
+import { renderReward, getRewardHitboxes } from './RewardView';
+import { renderShop } from './ShopView';
+import { renderEvent } from './EventView';
+import { renderRest } from './RestView';
+import { renderGameOver } from './GameOverView';
+import { renderVictory } from './VictoryView';
 import { InkStyle } from './style';
 
 export interface Animation {
@@ -32,7 +39,7 @@ export class Renderer {
         renderMainMenu(this.ctx, this.width, this.height);
         break;
       case 'character_select':
-        this.renderPlaceholder('选择角色');
+        renderCharacterSelect(this.ctx, this.width, this.height);
         break;
       case 'map':
         if (state.map) renderMap(this.ctx, state.map, this.width, this.height);
@@ -41,23 +48,72 @@ export class Renderer {
         if (state.battle) renderBattle(this.ctx, state.battle, this.width, this.height);
         break;
       case 'reward':
-        this.renderPlaceholder('奖励选牌');
+        if (state.reward) {
+          const choices = state.reward.cardChoices;
+          // Use the hitboxes helper to guarantee layout parity with input.
+          // It returns the same number of cards as `choices.length`.
+          getRewardHitboxes(this.width, this.height, choices.length);
+          renderReward(this.ctx, this.width, this.height, choices);
+        } else {
+          this.renderPlaceholder('奖励选牌');
+        }
         break;
       case 'shop':
-        this.renderPlaceholder('商店');
+        if (state.shop && state.run) {
+          renderShop(
+            this.ctx,
+            this.width,
+            this.height,
+            state.shop,
+            state.run.gold,
+            state.pendingShopRemove,
+          );
+        } else {
+          this.renderPlaceholder('商店');
+        }
         break;
       case 'event':
-        this.renderPlaceholder('事件');
+        if (state.event) {
+          renderEvent(this.ctx, this.width, this.height, {
+            title: state.event.title,
+            text: state.event.text,
+            choices: state.event.choices.map((c) => ({ text: c.text })),
+          });
+        } else {
+          this.renderPlaceholder('事件');
+        }
         break;
       case 'rest':
-        this.renderPlaceholder('休息');
+        if (state.run) {
+          renderRest(this.ctx, this.width, this.height, state.run.hp, state.run.maxHp);
+        } else {
+          this.renderPlaceholder('休息');
+        }
         break;
       case 'game_over':
-        this.renderPlaceholder('游戏结束');
+        renderGameOver(
+          this.ctx,
+          this.width,
+          this.height,
+          state.run?.floor ?? state.map?.floor ?? 1,
+          state.run?.characterId,
+        );
         break;
-      case 'victory':
-        this.renderPlaceholder('胜利');
+      case 'victory': {
+        const floor = state.run?.floor ?? state.map?.floor ?? 6;
+        const now = Date.now();
+        const startTime = state.run?.startTime ?? now;
+        const hp = state.run?.hp ?? 0;
+        const maxHp = state.run?.maxHp ?? 0;
+        renderVictory(
+          this.ctx,
+          this.width,
+          this.height,
+          { floor, durationMs: Math.max(0, now - startTime), finalHp: hp, maxHp },
+          state.run?.characterId,
+        );
         break;
+      }
     }
 
     this.renderAnimations();

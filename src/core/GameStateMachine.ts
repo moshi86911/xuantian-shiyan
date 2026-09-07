@@ -47,6 +47,7 @@ export type DispatchAction =
   | { type: 'menu_select'; action: string }
   | { type: 'character_confirm'; characterId: CharacterId }
   | { type: 'character_select'; characterId: CharacterId }
+  | { type: 'character_back' }
   | { type: 'select_map_node'; nodeId: string }
   | { type: 'battle_end'; outcome: 'won' | 'lost' }
   | { type: 'reward_take'; cardIndex: number }
@@ -355,15 +356,23 @@ function reduceMainMenu(s: GameState, action: DispatchAction): GameState {
 
 function reduceCharacterSelect(s: GameState, action: DispatchAction): GameState {
   if (action.type === 'character_select') {
-    // Clicking a card just highlights; no state change yet (Part 2 wires highlight UI).
-    return s;
+    // Clicking a card just highlights; store the selection on state.
+    return { ...s, selectedCharacterId: action.characterId };
+  }
+  if (action.type === 'character_back') {
+    return { ...s, screen: 'main_menu', selectedCharacterId: undefined };
   }
   if (action.type !== 'character_confirm') return s;
-  const character = loadCharacter(action.characterId);
+  // Allow the action to specify an id, but fall back to the highlighted one.
+  const id: CharacterId =
+    (action.characterId as CharacterId) ||
+    s.selectedCharacterId ||
+    'sword';
+  const character = loadCharacter(id);
   const player = character.toPlayerState();
   const run: RunState = {
-    seed: action.characterId + '-' + Date.now().toString(36),
-    characterId: action.characterId,
+    seed: id + '-' + Date.now().toString(36),
+    characterId: id,
     floor: 1,
     hp: player.hp,
     maxHp: player.maxHp,
@@ -381,6 +390,7 @@ function reduceCharacterSelect(s: GameState, action: DispatchAction): GameState 
     screen: 'map',
     run,
     map,
+    selectedCharacterId: undefined,
   };
 }
 
@@ -588,6 +598,11 @@ export class GameStateMachine {
   /** Register a listener that fires on every screen transition. */
   onTransition(fn: TransitionListener): void {
     this.listeners.push(fn);
+  }
+
+  /** Read the current state. */
+  getState(): GameState {
+    return this.state;
   }
 
   /**

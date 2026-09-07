@@ -163,6 +163,15 @@ describe('GameStateMachine — character_select', () => {
     const next = m.dispatch({ type: 'character_select', characterId: 'talisman' });
     expect(next.screen).toBe('character_select');
     expect(next.run).toBeUndefined();
+    expect(next.selectedCharacterId).toBe('talisman');
+  });
+
+  it('character_confirm with empty characterId uses the highlighted character', () => {
+    const m = new GameStateMachine(stateWithScreen('character_select'));
+    m.dispatch({ type: 'character_select', characterId: 'talisman' });
+    const next = m.dispatch({ type: 'character_confirm', characterId: '' as any });
+    expect(next.screen).toBe('map');
+    expect(next.run?.characterId).toBe('talisman');
   });
 });
 
