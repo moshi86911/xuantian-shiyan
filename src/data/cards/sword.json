@@ -1,0 +1,294 @@
+[
+  {
+    "id": "sword_strike",
+    "name": "御剑术",
+    "description": "造成 6 点伤害。",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "enemy",
+    "characterId": "sword",
+    "effects": [{ "type": "damage", "value": 6, "target": "enemy" }]
+  },
+  {
+    "id": "sword_slash",
+    "name": "剑气斩",
+    "description": "造成 8 点伤害，连击 +2。",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 2,
+    "targetType": "enemy",
+    "characterId": "sword",
+    "effects": [
+      { "type": "damage", "value": 8, "target": "enemy" },
+      { "type": "apply_buff", "value": 2, "target": "self", "statusId": "combo" }
+    ]
+  },
+  {
+    "id": "sword_draw",
+    "name": "剑意诀",
+    "description": "抽 2 张牌。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "none",
+    "characterId": "sword",
+    "effects": [{ "type": "draw", "value": 2 }]
+  },
+  {
+    "id": "sword_focus",
+    "name": "凝神",
+    "description": "获得 2 点能量。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 0,
+    "targetType": "self",
+    "characterId": "sword",
+    "effects": [{ "type": "gain_energy", "value": 2, "target": "self" }]
+  },
+  {
+    "id": "sword_defend",
+    "name": "轻身术",
+    "description": "获得 8 点格挡。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "self",
+    "characterId": "sword",
+    "effects": [{ "type": "block", "value": 8, "target": "self" }]
+  },
+  {
+    "id": "sword_break",
+    "name": "破甲式",
+    "description": "造成 9 点伤害，无视格挡。",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 2,
+    "targetType": "enemy",
+    "characterId": "sword",
+    "effects": [
+      { "type": "add_status", "value": 1, "target": "enemy", "statusId": "bypass_block" },
+      { "type": "damage", "value": 9, "target": "enemy" }
+    ]
+  },
+  {
+    "id": "sword_upgrade",
+    "name": "剑心通明",
+    "description": "升级手中一张随机卡牌。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "none",
+    "characterId": "sword",
+    "effects": [{ "type": "add_status", "value": 1, "statusId": "upgrade_random_card" }]
+  },
+  {
+    "id": "sword_swift",
+    "name": "疾风步",
+    "description": "本回合攻击力 +2。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "self",
+    "characterId": "sword",
+    "effects": [{ "type": "apply_buff", "value": 2, "target": "self", "statusId": "strength_temp" }]
+  },
+  {
+    "id": "sword_blade",
+    "name": "玄铁剑",
+    "description": "装备：攻击力 +2。",
+    "type": "power",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "self",
+    "characterId": "sword",
+    "effects": [{ "type": "apply_buff", "value": 2, "target": "self", "statusId": "strength" }]
+  },
+  {
+    "id": "sword_step",
+    "name": "身随意动",
+    "description": "抽 1 张牌，本回合能量 +1。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 0,
+    "targetType": "self",
+    "characterId": "sword",
+    "effects": [
+      { "type": "draw", "value": 1 },
+      { "type": "gain_energy", "value": 1, "target": "self" }
+    ]
+  },
+  {
+    "id": "sword_fly",
+    "name": "御剑飞行",
+    "description": "获得 10 点格挡，随机丢弃 1 张牌。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "self",
+    "characterId": "sword",
+    "effects": [
+      { "type": "block", "value": 10, "target": "self" },
+      { "type": "add_status", "value": 1, "target": "self", "statusId": "discard_random" }
+    ]
+  },
+  {
+    "id": "sword_guard",
+    "name": "剑气护体",
+    "description": "获得 5 点格挡，攻击力 +1。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "self",
+    "characterId": "sword",
+    "effects": [
+      { "type": "block", "value": 5, "target": "self" },
+      { "type": "apply_buff", "value": 1, "target": "self", "statusId": "strength" }
+    ]
+  },
+  {
+    "id": "sword_five_element",
+    "name": "五行剑气",
+    "description": "造成 12 点伤害。",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2,
+    "targetType": "enemy",
+    "characterId": "sword",
+    "effects": [{ "type": "damage", "value": 12, "target": "enemy" }]
+  },
+  {
+    "id": "sword_soul",
+    "name": "剑魂",
+    "description": "能力：每回合开始时抽 1 张牌。",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1,
+    "targetType": "self",
+    "characterId": "sword",
+    "effects": [{ "type": "apply_buff", "value": 1, "target": "self", "statusId": "draw_power" }]
+  },
+  {
+    "id": "sword_nine_swords",
+    "name": "独孤九剑",
+    "description": "对所有敌人各造成 6 点伤害，攻击 3 次。",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2,
+    "targetType": "all_enemies",
+    "characterId": "sword",
+    "effects": [
+      { "type": "damage", "value": 6, "target": "all_enemies" },
+      { "type": "damage", "value": 6, "target": "all_enemies" },
+      { "type": "damage", "value": 6, "target": "all_enemies" }
+    ]
+  },
+  {
+    "id": "sword_rising",
+    "name": "剑意冲霄",
+    "description": "造成 10 点伤害，连击 +3。",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2,
+    "targetType": "enemy",
+    "characterId": "sword",
+    "effects": [
+      { "type": "damage", "value": 10, "target": "enemy" },
+      { "type": "apply_buff", "value": 3, "target": "self", "statusId": "combo" }
+    ]
+  },
+  {
+    "id": "sword_thousand",
+    "name": "御剑·万刃",
+    "description": "对所有敌人造成 6 点伤害。",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2,
+    "targetType": "all_enemies",
+    "characterId": "sword",
+    "effects": [{ "type": "damage", "value": 6, "target": "all_enemies" }]
+  },
+  {
+    "id": "sword_heart",
+    "name": "剑心诀",
+    "description": "能力：每次造成伤害后回复 1 点生命。",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2,
+    "targetType": "self",
+    "characterId": "sword",
+    "effects": [{ "type": "apply_buff", "value": 1, "target": "self", "statusId": "damage_lifesteal" }]
+  },
+  {
+    "id": "sword_mastery",
+    "name": "化境剑诀",
+    "description": "本回合所有攻击牌伤害 +100%。",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1,
+    "targetType": "self",
+    "characterId": "sword",
+    "effects": [{ "type": "apply_buff", "value": 100, "target": "self", "statusId": "attack_amplify_temp" }]
+  },
+  {
+    "id": "sword_celestial",
+    "name": "天外飞仙",
+    "description": "造成 30 点伤害。",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 3,
+    "targetType": "enemy",
+    "characterId": "sword",
+    "effects": [{ "type": "damage", "value": 30, "target": "enemy" }]
+  },
+  {
+    "id": "sword_ultimate",
+    "name": "万剑归宗",
+    "description": "造成等于连击层数 × 5 的伤害。",
+    "type": "attack",
+    "rarity": "legendary",
+    "cost": 3,
+    "targetType": "enemy",
+    "characterId": "sword",
+    "effects": [
+      { "type": "add_status", "value": 5, "target": "enemy", "statusId": "damage_per_combo" },
+      { "type": "damage", "value": 0, "target": "enemy" }
+    ]
+  },
+  {
+    "id": "sword_sovereign",
+    "name": "剑道宗师",
+    "description": "能力：所有攻击伤害 +50%。",
+    "type": "power",
+    "rarity": "legendary",
+    "cost": 3,
+    "targetType": "self",
+    "characterId": "sword",
+    "effects": [{ "type": "apply_buff", "value": 50, "target": "self", "statusId": "attack_amplify" }]
+  },
+  {
+    "id": "sword_one_strike",
+    "name": "一剑破万法",
+    "description": "造成 30 点伤害，并移除敌人所有增益。",
+    "type": "attack",
+    "rarity": "legendary",
+    "cost": 3,
+    "targetType": "enemy",
+    "characterId": "sword",
+    "effects": [
+      { "type": "damage", "value": 30, "target": "enemy" },
+      { "type": "add_status", "value": 1, "target": "enemy", "statusId": "remove_all_enemy_buffs" }
+    ]
+  },
+  {
+    "id": "sword_no_blade",
+    "name": "无剑胜有剑",
+    "description": "能力：攻击牌不再消耗能量。",
+    "type": "power",
+    "rarity": "legendary",
+    "cost": 2,
+    "targetType": "self",
+    "characterId": "sword",
+    "effects": [{ "type": "apply_buff", "value": 1, "target": "self", "statusId": "energy_free" }]
+  }
+]

@@ -1,0 +1,240 @@
+[
+  {
+    "id": "talisman_charm",
+    "name": "镇魂符",
+    "description": "给予敌人 2 层印记。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "enemy",
+    "characterId": "talisman",
+    "effects": [{ "type": "apply_debuff", "value": 2, "target": "enemy", "statusId": "mark" }]
+  },
+  {
+    "id": "talisman_thunder",
+    "name": "五雷符",
+    "description": "对敌人每层印记造成 5 点伤害。",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 2,
+    "targetType": "enemy",
+    "characterId": "talisman",
+    "effects": [
+      { "type": "add_status", "value": 5, "target": "enemy", "statusId": "damage_per_mark" },
+      { "type": "damage", "value": 0, "target": "enemy" }
+    ]
+  },
+  {
+    "id": "talisman_pacify",
+    "name": "安神符",
+    "description": "获得 8 点格挡。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "self",
+    "characterId": "talisman",
+    "effects": [{ "type": "block", "value": 8, "target": "self" }]
+  },
+  {
+    "id": "talisman_repel",
+    "name": "驱邪符",
+    "description": "移除自身 1 个随机减益。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "self",
+    "characterId": "talisman",
+    "effects": [{ "type": "add_status", "value": 1, "target": "self", "statusId": "remove_random_debuff" }]
+  },
+  {
+    "id": "talisman_dispel",
+    "name": "破咒符",
+    "description": "移除敌人所有增益。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 2,
+    "targetType": "enemy",
+    "characterId": "talisman",
+    "effects": [{ "type": "add_status", "value": 1, "target": "enemy", "statusId": "remove_all_enemy_buffs" }]
+  },
+  {
+    "id": "talisman_speed",
+    "name": "神行符",
+    "description": "抽 2 张牌。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "none",
+    "characterId": "talisman",
+    "effects": [{ "type": "draw", "value": 2 }]
+  },
+  {
+    "id": "talisman_focus_qi",
+    "name": "凝神聚气",
+    "description": "获得 2 点灵气。",
+    "type": "qi",
+    "rarity": "common",
+    "cost": 0,
+    "targetType": "self",
+    "characterId": "talisman",
+    "effects": [{ "type": "gain_qi", "value": 2, "target": "self" }]
+  },
+  {
+    "id": "talisman_weaken",
+    "name": "虚弱符",
+    "description": "给予敌人 1 层虚弱。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "enemy",
+    "characterId": "talisman",
+    "effects": [{ "type": "apply_debuff", "value": 1, "target": "enemy", "statusId": "weak" }]
+  },
+  {
+    "id": "talisman_expose",
+    "name": "破甲符",
+    "description": "给予敌人 1 层易伤。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "enemy",
+    "characterId": "talisman",
+    "effects": [{ "type": "apply_debuff", "value": 1, "target": "enemy", "statusId": "vulnerable" }]
+  },
+  {
+    "id": "talisman_heal",
+    "name": "养心符",
+    "description": "回复 5 点生命。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "self",
+    "characterId": "talisman",
+    "effects": [{ "type": "heal", "value": 5, "target": "self" }]
+  },
+  {
+    "id": "talisman_celestial",
+    "name": "天师符",
+    "description": "造成 12 点伤害，给予 3 层印记。",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2,
+    "targetType": "enemy",
+    "characterId": "talisman",
+    "effects": [
+      { "type": "damage", "value": 12, "target": "enemy" },
+      { "type": "apply_debuff", "value": 3, "target": "enemy", "statusId": "mark" }
+    ]
+  },
+  {
+    "id": "talisman_five_thunder",
+    "name": "五雷轰顶",
+    "description": "造成 8 点伤害，每层印记额外造成 4 点伤害。",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2,
+    "targetType": "enemy",
+    "characterId": "talisman",
+    "effects": [
+      { "type": "add_status", "value": 4, "target": "enemy", "statusId": "damage_per_mark" },
+      { "type": "damage", "value": 8, "target": "enemy" }
+    ]
+  },
+  {
+    "id": "talisman_seal",
+    "name": "封魔符",
+    "description": "敌人 2 回合内无法攻击。",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 2,
+    "targetType": "enemy",
+    "characterId": "talisman",
+    "effects": [{ "type": "apply_debuff", "value": 2, "target": "enemy", "statusId": "stun" }]
+  },
+  {
+    "id": "talisman_explosion",
+    "name": "爆裂符",
+    "description": "造成 8 点伤害，消耗敌人所有印记，每层额外造成 4 点伤害。",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2,
+    "targetType": "enemy",
+    "characterId": "talisman",
+    "effects": [
+      { "type": "add_status", "value": 4, "target": "enemy", "statusId": "consume_mark_damage" },
+      { "type": "damage", "value": 8, "target": "enemy" }
+    ]
+  },
+  {
+    "id": "talisman_power",
+    "name": "符力涌动",
+    "description": "能力：每回合结束时给予敌人 1 层印记。",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2,
+    "targetType": "self",
+    "characterId": "talisman",
+    "effects": [{ "type": "apply_buff", "value": 1, "target": "self", "statusId": "mark_power" }]
+  },
+  {
+    "id": "talisman_master_seal",
+    "name": "天师敕令",
+    "description": "将敌人每层印记转化为 1 回合眩晕。",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 3,
+    "targetType": "enemy",
+    "characterId": "talisman",
+    "effects": [{ "type": "add_status", "value": 1, "target": "enemy", "statusId": "mark_to_stun" }]
+  },
+  {
+    "id": "talisman_counterstrike",
+    "name": "反戈符",
+    "description": "能力：敌人攻击你时受到 8 点反弹伤害。",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 2,
+    "targetType": "self",
+    "characterId": "talisman",
+    "effects": [{ "type": "apply_buff", "value": 8, "target": "self", "statusId": "thorns" }]
+  },
+  {
+    "id": "talisman_golden_light",
+    "name": "金光神符",
+    "description": "对所有敌人造成 15 点伤害，每层印记额外造成 5 点伤害。",
+    "type": "attack",
+    "rarity": "legendary",
+    "cost": 3,
+    "targetType": "all_enemies",
+    "characterId": "talisman",
+    "effects": [
+      { "type": "add_status", "value": 5, "target": "all_enemies", "statusId": "damage_per_mark" },
+      { "type": "damage", "value": 15, "target": "all_enemies" }
+    ]
+  },
+  {
+    "id": "talisman_soul_bind",
+    "name": "魂锁符",
+    "description": "所有敌人眩晕 1 回合，每层印记额外延长 1 回合。",
+    "type": "skill",
+    "rarity": "legendary",
+    "cost": 3,
+    "targetType": "all_enemies",
+    "characterId": "talisman",
+    "effects": [
+      { "type": "apply_debuff", "value": 1, "target": "all_enemies", "statusId": "stun" },
+      { "type": "add_status", "value": 1, "target": "all_enemies", "statusId": "mark_to_stun" }
+    ]
+  },
+  {
+    "id": "talisman_dao",
+    "name": "道法自然",
+    "description": "能力：每回合开始时获得 1 点印记之力。",
+    "type": "power",
+    "rarity": "legendary",
+    "cost": 2,
+    "targetType": "self",
+    "characterId": "talisman",
+    "effects": [{ "type": "apply_buff", "value": 1, "target": "self", "statusId": "dao_mark_power" }]
+  }
+]

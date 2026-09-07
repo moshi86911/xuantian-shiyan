@@ -1,0 +1,202 @@
+[
+  {
+    "id": "alchemy_calm",
+    "name": "凝神丹",
+    "description": "回复 3 点生命，获得 1 点灵气。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 0,
+    "targetType": "self",
+    "characterId": "alchemy",
+    "effects": [
+      { "type": "heal", "value": 3, "target": "self" },
+      { "type": "gain_qi", "value": 1, "target": "self" }
+    ]
+  },
+  {
+    "id": "alchemy_meridian",
+    "name": "通脉丹",
+    "description": "抽 2 张牌。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "none",
+    "characterId": "alchemy",
+    "effects": [{ "type": "draw", "value": 2 }]
+  },
+  {
+    "id": "alchemy_purify",
+    "name": "清心丹",
+    "description": "移除自身所有减益。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "self",
+    "characterId": "alchemy",
+    "effects": [{ "type": "add_status", "value": 1, "target": "self", "statusId": "remove_all_debuffs" }]
+  },
+  {
+    "id": "alchemy_pill_basic",
+    "name": "丹药·初",
+    "description": "造成 4 点伤害。",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "enemy",
+    "characterId": "alchemy",
+    "effects": [{ "type": "damage", "value": 4, "target": "enemy" }]
+  },
+  {
+    "id": "alchemy_pill_strong",
+    "name": "丹药·强",
+    "description": "造成 8 点伤害。",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 2,
+    "targetType": "enemy",
+    "characterId": "alchemy",
+    "effects": [{ "type": "damage", "value": 8, "target": "enemy" }]
+  },
+  {
+    "id": "alchemy_qi_focus",
+    "name": "灵气凝聚",
+    "description": "获得 3 点灵气。",
+    "type": "qi",
+    "rarity": "common",
+    "cost": 0,
+    "targetType": "self",
+    "characterId": "alchemy",
+    "effects": [{ "type": "gain_qi", "value": 3, "target": "self" }]
+  },
+  {
+    "id": "alchemy_block",
+    "name": "金身诀",
+    "description": "获得 8 点格挡。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "self",
+    "characterId": "alchemy",
+    "effects": [{ "type": "block", "value": 8, "target": "self" }]
+  },
+  {
+    "id": "alchemy_heal_small",
+    "name": "小还丹",
+    "description": "回复 6 点生命。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "self",
+    "characterId": "alchemy",
+    "effects": [{ "type": "heal", "value": 6, "target": "self" }]
+  },
+  {
+    "id": "alchemy_resurrection",
+    "name": "九转还魂",
+    "description": "回复 12 点生命，移除 1 个减益。",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 2,
+    "targetType": "self",
+    "characterId": "alchemy",
+    "effects": [
+      { "type": "heal", "value": 12, "target": "self" },
+      { "type": "add_status", "value": 1, "target": "self", "statusId": "remove_random_debuff" }
+    ]
+  },
+  {
+    "id": "alchemy_spring",
+    "name": "回春诀",
+    "description": "能力：每回合开始时回复 3 点生命。",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1,
+    "targetType": "self",
+    "characterId": "alchemy",
+    "effects": [{ "type": "apply_buff", "value": 3, "target": "self", "statusId": "regen" }]
+  },
+  {
+    "id": "alchemy_thunder_pill",
+    "name": "雷火丹",
+    "description": "造成 12 点伤害。",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2,
+    "targetType": "enemy",
+    "characterId": "alchemy",
+    "effects": [{ "type": "damage", "value": 12, "target": "enemy" }]
+  },
+  {
+    "id": "alchemy_ice_pill",
+    "name": "玄冰丹",
+    "description": "对所有敌人造成 5 点伤害并给予 1 层易伤。",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2,
+    "targetType": "all_enemies",
+    "characterId": "alchemy",
+    "effects": [
+      { "type": "damage", "value": 5, "target": "all_enemies" },
+      { "type": "apply_debuff", "value": 1, "target": "all_enemies", "statusId": "vulnerable" }
+    ]
+  },
+  {
+    "id": "alchemy_pill_master",
+    "name": "灵丹妙药",
+    "description": "回复 15 点生命。",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 2,
+    "targetType": "self",
+    "characterId": "alchemy",
+    "effects": [{ "type": "heal", "value": 15, "target": "self" }]
+  },
+  {
+    "id": "alchemy_qi_master",
+    "name": "灵气掌控",
+    "description": "能力：灵气上限 +2。",
+    "type": "power",
+    "rarity": "rare",
+    "cost": 1,
+    "targetType": "self",
+    "characterId": "alchemy",
+    "effects": [{ "type": "apply_buff", "value": 2, "target": "self", "statusId": "max_qi_up" }]
+  },
+  {
+    "id": "alchemy_jade_pill",
+    "name": "玉清丹",
+    "description": "对所有敌人造成 10 点伤害，并回复 8 点生命。",
+    "type": "attack",
+    "rarity": "legendary",
+    "cost": 3,
+    "targetType": "all_enemies",
+    "characterId": "alchemy",
+    "effects": [
+      { "type": "damage", "value": 10, "target": "all_enemies" },
+      { "type": "heal", "value": 8, "target": "self" }
+    ]
+  },
+  {
+    "id": "alchemy_immortal",
+    "name": "不死之身",
+    "description": "能力：死亡时自动复活一次。",
+    "type": "power",
+    "rarity": "legendary",
+    "cost": 3,
+    "targetType": "self",
+    "characterId": "alchemy",
+    "exhaust": true,
+    "effects": [{ "type": "apply_buff", "value": 1, "target": "self", "statusId": "revive" }]
+  },
+  {
+    "id": "alchemy_dao",
+    "name": "丹道宗师",
+    "description": "能力：每张丹药牌额外回复 5 点生命。",
+    "type": "power",
+    "rarity": "legendary",
+    "cost": 2,
+    "targetType": "self",
+    "characterId": "alchemy",
+    "effects": [{ "type": "apply_buff", "value": 5, "target": "self", "statusId": "pill_heal_bonus" }]
+  }
+]

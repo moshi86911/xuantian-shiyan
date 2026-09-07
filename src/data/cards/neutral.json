@@ -1,0 +1,124 @@
+[
+  {
+    "id": "neutral_strike",
+    "name": "普通攻击",
+    "description": "造成 5 点伤害。",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "enemy",
+    "effects": [{ "type": "damage", "value": 5, "target": "enemy" }]
+  },
+  {
+    "id": "neutral_defend",
+    "name": "普通防御",
+    "description": "获得 5 点格挡。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "self",
+    "effects": [{ "type": "block", "value": 5, "target": "self" }]
+  },
+  {
+    "id": "neutral_dodge",
+    "name": "闪避",
+    "description": "获得 8 点格挡，下回合多抽 2 张牌。",
+    "type": "skill",
+    "rarity": "common",
+    "cost": 1,
+    "targetType": "self",
+    "effects": [
+      { "type": "block", "value": 8, "target": "self" },
+      { "type": "apply_buff", "value": 2, "target": "self", "statusId": "next_turn_draw" }
+    ]
+  },
+  {
+    "id": "neutral_bash",
+    "name": "重击",
+    "description": "造成 7 点伤害并给予 1 层易伤。",
+    "type": "attack",
+    "rarity": "common",
+    "cost": 2,
+    "targetType": "enemy",
+    "effects": [
+      { "type": "damage", "value": 7, "target": "enemy" },
+      { "type": "apply_debuff", "value": 1, "target": "enemy", "statusId": "vulnerable" }
+    ]
+  },
+  {
+    "id": "neutral_meditate",
+    "name": "打坐",
+    "description": "获得 1 点灵气。",
+    "type": "qi",
+    "rarity": "common",
+    "cost": 0,
+    "targetType": "self",
+    "effects": [{ "type": "gain_qi", "value": 1, "target": "self" }]
+  },
+  {
+    "id": "neutral_thunderbolt",
+    "name": "天雷",
+    "description": "造成 10 点伤害并眩晕敌人 1 回合。",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 2,
+    "targetType": "enemy",
+    "effects": [
+      { "type": "damage", "value": 10, "target": "enemy" },
+      { "type": "apply_debuff", "value": 1, "target": "enemy", "statusId": "stun" }
+    ]
+  },
+  {
+    "id": "neutral_iron_will",
+    "name": "钢铁意志",
+    "description": "获得 12 点格挡。",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 2,
+    "targetType": "self",
+    "effects": [{ "type": "block", "value": 12, "target": "self" }]
+  },
+  {
+    "id": "neutral_mark",
+    "name": "印记",
+    "description": "敌人 2 回合内受到的伤害 +25%。",
+    "type": "skill",
+    "rarity": "rare",
+    "cost": 1,
+    "targetType": "enemy",
+    "effects": [{ "type": "apply_debuff", "value": 2, "target": "enemy", "statusId": "mark" }]
+  },
+  {
+    "id": "neutral_cleave",
+    "name": "横斩",
+    "description": "对所有敌人造成 5 点伤害。",
+    "type": "attack",
+    "rarity": "rare",
+    "cost": 1,
+    "targetType": "all_enemies",
+    "effects": [{ "type": "damage", "value": 5, "target": "all_enemies" }]
+  },
+  {
+    "id": "neutral_immortal_strike",
+    "name": "不死之击",
+    "description": "造成 18 点伤害并回复 8 点生命。",
+    "type": "attack",
+    "rarity": "legendary",
+    "cost": 3,
+    "targetType": "enemy",
+    "effects": [
+      { "type": "damage", "value": 18, "target": "enemy" },
+      { "type": "heal", "value": 8, "target": "self" }
+    ]
+  },
+  {
+    "id": "neutral_dao_heart",
+    "name": "道心",
+    "description": "能力：所有卡牌费用 -1。",
+    "type": "power",
+    "rarity": "legendary",
+    "cost": 2,
+    "targetType": "self",
+    "effects": [{ "type": "apply_buff", "value": 1, "target": "self", "statusId": "cost_reduction" }]
+  }
+]
