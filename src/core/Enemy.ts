@@ -41,6 +41,7 @@ export class EnemyState {
   hp: number;
   block: number;
   data: EnemyData;
+  intents: EnemyIntentData[];
   currentIntentIndex: number;
   buffs: BuffSystem;
   statuses: { type: string; stacks: number; duration?: number }[];
@@ -53,6 +54,7 @@ export class EnemyState {
     this.hp = data.maxHp;
     this.block = 0;
     this.data = data;
+    this.intents = data.intents;
     this.currentIntentIndex = 0;
     this.buffs = new BuffSystem();
     this.statuses = [];
@@ -63,11 +65,11 @@ export class EnemyState {
   }
 
   getCurrentIntent(): EnemyIntentData {
-    return this.data.intents[this.currentIntentIndex];
+    return this.intents[this.currentIntentIndex] ?? this.data.intents[this.currentIntentIndex];
   }
 
   advanceIntent(): void {
-    this.currentIntentIndex = (this.currentIntentIndex + 1) % this.data.intents.length;
+    this.currentIntentIndex = (this.currentIntentIndex + 1) % this.intents.length;
   }
 
   reset(): void {
@@ -76,5 +78,6 @@ export class EnemyState {
     this.currentIntentIndex = 0;
     this.buffs.clear();
     this.statuses = [];
+    // intents array reference doesn't need reset (immutable)
   }
 }
