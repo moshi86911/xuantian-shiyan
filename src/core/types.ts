@@ -35,6 +35,7 @@ export interface Card {
   targetType: TargetType;
   effects: CardEffect[];
   characterId?: CharacterId;
+  exhaust?: boolean;
 }
 
 export interface PlayerState {
