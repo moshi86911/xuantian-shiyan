@@ -1,0 +1,244 @@
+[
+  {
+    "id": "wolf",
+    "name": "妖狼",
+    "tier": "normal",
+    "maxHp": 28,
+    "intents": [
+      { "type": "attack", "value": 6 },
+      { "type": "defend", "value": 5 }
+    ],
+    "aiPattern": "sequence",
+    "description": "山中凶兽，爪利牙尖"
+  },
+  {
+    "id": "snake",
+    "name": "毒蛇",
+    "tier": "normal",
+    "maxHp": 22,
+    "intents": [
+      { "type": "attack", "value": 4 },
+      { "type": "debuff", "value": 1, "specialEffect": "poison" }
+    ],
+    "aiPattern": "sequence",
+    "description": "剧毒之蛇"
+  },
+  {
+    "id": "xiexiu",
+    "name": "邪修",
+    "tier": "normal",
+    "maxHp": 35,
+    "intents": [
+      { "type": "attack", "value": 7 },
+      { "type": "buff", "value": 1, "specialEffect": "strength" }
+    ],
+    "aiPattern": "adaptive",
+    "description": "左道修士"
+  },
+  {
+    "id": "zayao",
+    "name": "杂妖",
+    "tier": "normal",
+    "maxHp": 25,
+    "intents": [
+      { "type": "attack", "value": 5 },
+      { "type": "attack", "value": 3 }
+    ],
+    "aiPattern": "simple",
+    "description": "小妖"
+  },
+  {
+    "id": "xinmo",
+    "name": "心魔",
+    "tier": "normal",
+    "maxHp": 30,
+    "intents": [
+      { "type": "debuff", "value": 1, "specialEffect": "weak" },
+      { "type": "attack", "value": 6 }
+    ],
+    "aiPattern": "sequence",
+    "description": "心魔侵扰"
+  },
+  {
+    "id": "slime",
+    "name": "史莱姆",
+    "tier": "normal",
+    "maxHp": 40,
+    "intents": [
+      { "type": "defend", "value": 8 },
+      { "type": "attack", "value": 4 }
+    ],
+    "aiPattern": "simple",
+    "description": "粘液怪物"
+  },
+  {
+    "id": "bat",
+    "name": "蝙蝠",
+    "tier": "normal",
+    "maxHp": 18,
+    "intents": [
+      { "type": "attack", "value": 3 },
+      { "type": "attack", "value": 3 },
+      { "type": "defend", "value": 4 }
+    ],
+    "aiPattern": "sequence",
+    "description": "吸血蝙蝠"
+  },
+  {
+    "id": "shixiang",
+    "name": "石像",
+    "tier": "normal",
+    "maxHp": 50,
+    "intents": [
+      { "type": "defend", "value": 10 },
+      { "type": "attack", "value": 8 }
+    ],
+    "aiPattern": "sequence",
+    "description": "护山石像"
+  },
+  {
+    "id": "tengyao",
+    "name": "藤妖",
+    "tier": "normal",
+    "maxHp": 32,
+    "intents": [
+      { "type": "attack", "value": 5 },
+      { "type": "debuff", "value": 1, "specialEffect": "vulnerable" }
+    ],
+    "aiPattern": "adaptive",
+    "description": "古藤成妖"
+  },
+  {
+    "id": "shuigui",
+    "name": "水鬼",
+    "tier": "normal",
+    "maxHp": 28,
+    "intents": [
+      { "type": "debuff", "value": 1, "specialEffect": "weak" },
+      { "type": "attack", "value": 6 }
+    ],
+    "aiPattern": "sequence",
+    "description": "溺死之鬼"
+  },
+  {
+    "id": "huoya",
+    "name": "火鸦",
+    "tier": "normal",
+    "maxHp": 26,
+    "intents": [
+      { "type": "attack", "value": 5 },
+      { "type": "buff", "value": 1, "specialEffect": "strength" }
+    ],
+    "aiPattern": "adaptive",
+    "description": "火焰之鸦"
+  },
+  {
+    "id": "huanchan",
+    "name": "寒蝉",
+    "tier": "normal",
+    "maxHp": 24,
+    "intents": [
+      { "type": "attack", "value": 4 },
+      { "type": "debuff", "value": 1, "specialEffect": "frail" }
+    ],
+    "aiPattern": "sequence",
+    "description": "寒冰蝉虫"
+  },
+  {
+    "id": "mozhe",
+    "name": "墨者",
+    "tier": "normal",
+    "maxHp": 30,
+    "intents": [
+      { "type": "attack", "value": 7 },
+      { "type": "defend", "value": 6 }
+    ],
+    "aiPattern": "simple",
+    "description": "墨家弟子"
+  },
+  {
+    "id": "jianshi",
+    "name": "剑侍",
+    "tier": "normal",
+    "maxHp": 35,
+    "intents": [
+      { "type": "attack", "value": 8 },
+      { "type": "defend", "value": 4 }
+    ],
+    "aiPattern": "sequence",
+    "description": "剑修侍从"
+  },
+  {
+    "id": "lingtong",
+    "name": "灵童",
+    "tier": "normal",
+    "maxHp": 22,
+    "intents": [
+      { "type": "buff", "value": 1, "specialEffect": "dexterity" },
+      { "type": "attack", "value": 5 }
+    ],
+    "aiPattern": "adaptive",
+    "description": "灵气童子"
+  },
+  {
+    "id": "gushi",
+    "name": "蛊师",
+    "tier": "normal",
+    "maxHp": 28,
+    "intents": [
+      { "type": "debuff", "value": 1, "specialEffect": "poison" },
+      { "type": "attack", "value": 4 }
+    ],
+    "aiPattern": "sequence",
+    "description": "苗疆蛊师"
+  },
+  {
+    "id": "kuilei",
+    "name": "傀儡",
+    "tier": "normal",
+    "maxHp": 40,
+    "intents": [
+      { "type": "defend", "value": 7 },
+      { "type": "attack", "value": 6 }
+    ],
+    "aiPattern": "simple",
+    "description": "术士傀儡"
+  },
+  {
+    "id": "jingling",
+    "name": "镜灵",
+    "tier": "normal",
+    "maxHp": 32,
+    "intents": [
+      { "type": "attack", "value": 6 },
+      { "type": "buff", "value": 1, "specialEffect": "intangible" }
+    ],
+    "aiPattern": "adaptive",
+    "description": "古镜之灵"
+  },
+  {
+    "id": "yecha",
+    "name": "夜叉",
+    "tier": "normal",
+    "maxHp": 36,
+    "intents": [
+      { "type": "attack", "value": 9 },
+      { "type": "defend", "value": 5 }
+    ],
+    "aiPattern": "sequence",
+    "description": "恶鬼夜叉"
+  },
+  {
+    "id": "yaohu",
+    "name": "妖狐",
+    "tier": "normal",
+    "maxHp": 30,
+    "intents": [
+      { "type": "debuff", "value": 1, "specialEffect": "vulnerable" },
+      { "type": "attack", "value": 7 },
+      { "type": "defend", "value": 4 }
+    ],
+    "aiPattern": "adaptive",
+    "description": "狡诈妖狐"
+  }
+]
