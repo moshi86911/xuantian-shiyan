@@ -4,7 +4,7 @@
     "title": "山中老者",
     "text": "你遇到一位山中老者，他愿意传授你一项技艺。",
     "choices": [
-      { "text": "聆听教诲", "effect": { "type": "upgrade_random_card" } },
+      { "text": "聆听教诲", "effect": { "type": "gain_qi", "amount": 2 } },
       { "text": "婉言谢绝", "effect": { "type": "gain_gold", "amount": 30 } },
       { "text": "强行搜刮", "effect": { "type": "lose_hp", "amount": 10 } }
     ]
@@ -54,7 +54,7 @@
     "title": "镜中幻象",
     "text": "一面古镜映出你的倒影，但它的动作和你不同步。",
     "choices": [
-      { "text": "凝视镜面", "effect": { "type": "gain_max_hp", "amount": 5 } },
+      { "text": "凝视镜面", "effect": { "type": "gain_gold", "amount": 50 } },
       { "text": "转身离去", "effect": { "type": "noop" } },
       { "text": "砸碎古镜", "effect": { "type": "lose_hp", "amount": 12 } }
     ]
