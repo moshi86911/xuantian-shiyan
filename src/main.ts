@@ -24,14 +24,16 @@ if (savedSlot) {
 const machine = new GameStateMachine(initial);
 
 // ---- Side effects (auto-save + slot refresh) ---------------------------
-machine.onTransition((_from, to) => {
+machine.onTransition((from, to) => {
   const state = machine.getState();
   if (to === 'map' && state.run) {
     // Save whenever we land back on the map (node complete checkpoint).
     saveManager.save(0, state.run);
   }
-  // Refresh slot 0 whenever we re-enter main_menu so "Continue" is accurate.
-  if (to === 'main_menu') {
+  // Refresh slot 0 whenever we re-enter main_menu so "Continue" is
+  // accurate — BUT skip the refresh if we just came from victory or
+  // game_over, because those reducers intentionally wipe slot 0.
+  if (to === 'main_menu' && from !== 'victory' && from !== 'game_over') {
     const fresh = saveManager.load(0);
     machine.updateOptions({ savedSlot: fresh });
   }
